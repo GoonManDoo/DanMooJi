@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.micol.kym.student.service.StudentMapper">
+	
+	<select id="studentSelectList" 
+		resultType="co.micol.kym.student.vo.StudentVO">
+		SELECT * FROM STUDENT
+	</select>
+	
+	<select id="studentSelect" 
+		parameterType="co.micol.kym.student.vo.StudentVO"
+		resultType="co.micol.kym.student.vo.StudentVO">
+		
+		SELECT * FROM STUDENT 
+		WHERE ID = #{id}
+		<if test= "password != null">
+			AND PASSWORD = #{password}
+		</if>
+	</select>
+	
+	<insert id="studentInsert" 
+		parameterType="co.micol.kym.student.vo.StudentVO">
+		
+		INSERT INTO STUDENT
+		VALUES(#{id}, #{password}, #{name}, #{address}, #{tel}, #{birthday}, #{age})
+	</insert>
+	
+	<update id="studentUpdate" parameterType="co.micol.kym.student.vo.StudentVO">
+		UPDATE STUDENT
+		SET NAME = #{name} where id = #{id}
+	</update>
+	
+	<delete id="studentDelete" parameterType="co.micol.kym.student.vo.StudentVO">
+		DELETE FROM STUDENT WHERE ID = #{id}
+    </delete>
+    
+    <select id="idCheck" parameterType="String" resultType="boolean">
+    	SELECT CASE WHEN COUNT(ID) = 1 THEN 1 ELSE 0 END AS ID
+		FROM STUDENT
+		WHERE ID = #{id}
+    </select>
+</mapper>
