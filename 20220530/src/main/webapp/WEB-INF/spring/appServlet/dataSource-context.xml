@@ -25,6 +25,6 @@
 		<property name="mapperLocations" value="classpath*:co/micol/kym/**/service/*-map.xml"/>
 	</bean>
 	
-	<mybatis-spring:scan base-package="co.micol.kym"/>
+	<mybatis-spring:scan base-package="co.micol.min"/>
 	
 </beans>
