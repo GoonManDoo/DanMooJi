@@ -30,9 +30,15 @@
          SELECT CASE WHEN MAX(NOTICE_ID) != 0 THEN MAX(NOTICE_ID) + 1
                ELSE 1  END AS ID FROM NOTICE
       </selectKey>
-      INSERT INTO NOTICE 
-      VALUES (#{noticeId}, #{noticeName}, #{noticeTitle}, #{noticeContents}, 
-              #{noticeDate},0, #{noticeAttech}, #{noticeDir})
+
+      INSERT INTO NOTICE (NOTICE_ID, NOTICE_NAME, NOTICE_TITLE, NOTICE_CONTENTS,
+      					  NOTICE_DATE, NOTICE_HIT, NOTICE_ATTECH, NOTICE_DIR)
+      VALUES 
+      (
+     
+      #{noticeId}, #{noticeName}, #{noticeTitle}, #{noticeContents}, 
+              #{noticeDate},0, #{noticeAttech}, #{noticeDir}
+      )
    </insert>
    
    <update id="noticeUpdate" parameterType="co.micol.min.notice.vo.NoticeVO">
