@@ -27,7 +27,7 @@
 			<input type="text" id="key" name="key">&nbsp;
 			<button type="button" onclick="searchList()">검색</button>
 		</form>
-	</div><br>
+	</div><br>d
 	<div>
 		<table id = "tb" border="1">
 			<thead>
@@ -84,30 +84,20 @@
 	})
 </script>
 <script type="text/javascript">
-   function searchList(){
-	   let list = document.querySelector('tbody')
-	   let t = "<tr/>";
-	   
-      fetch("ajaxSearchList.do",{
-         method: 'POST',
-         body : new FormData(document.getElementById('frm'))
-         })
-         .then(response => response.json())
-         .then(data => {
-        	 list.remove();
-			data.forEach(n=>{
-				let td = "<tr><td>"
-				td.append(n.noticeId),
-				td.append(n.noticeName),
-				td.append(n.noticeTitle),
-				td.append(n.noticeDate),
-				td.append(n.noticeHit),
-				td.append(n.noticeAttech);
-				td.append(t);
-			})
-			list.add(t); //tbody에 추가하고 
-			list.disabled = true;
-		})
-      }      
+ function drawTbTable(dataList) {
+	let tboy = document.querySelector('#tb tbody');
+	let theadArr = ['noticeId', 'noticeName', 'noticeTitle', 'noticeDate', 'noticeHit', 'noticeAttech'];
+	
+	tbody.innerHTML = '';
+	for(let data of dataList) {
+		let mtr = document.createElement('tr');
+		theadArr.forEach( v => {
+			let mtd = document.createElement('td');
+			mtd.innerText = data[v];
+		mtr.appendchild(mtd);
+		});
+		tbody.appendchild(mtr);
+	}
+}
 </script>
 </html>
