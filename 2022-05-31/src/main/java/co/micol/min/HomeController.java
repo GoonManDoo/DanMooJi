@@ -27,4 +27,10 @@ public class HomeController {
 		return "home/home";
 	}
 	
+	@RequestMapping("/admin.do")
+	public String admin() {
+		return "admin"; //admin tiles 적용
+	}
+	
+	
 }

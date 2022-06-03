@@ -14,6 +14,7 @@
 		<a href="studentLoginForm.do">로 그 인</a><p>
 		<a href="studentLogout.do">로그아웃</a><p>
 		<a href="noticeList.do">게시글목록보기</a><p>
+		<a href="admin.do">관리자</a><p>
 	</div>
 </div>
 </body>
