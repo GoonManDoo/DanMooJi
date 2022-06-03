@@ -10,7 +10,7 @@
 <div align="center">
 		<div><h1>게시글 수정</h1></div>
 		<div>
-			<form id="frm" action="noticeModify.do" method="post" enctype="multipart/form-data">
+			<form id="frm" action="noticeModify.do" method="post">
 				<div>
 					<table border="1">
 						<tr>
