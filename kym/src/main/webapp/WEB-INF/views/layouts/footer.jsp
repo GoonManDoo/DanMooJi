@@ -9,8 +9,8 @@
 <body>
 <div align="center">
 	<div>
-	<h3>내가 만든 시험용 화면</h3>
-	<h3>만든이 : micol kym.</h3>
+	<h3>스프링 시험 홈페이지</h3>
+	<h3>만든이 : Kim Young Min</h3>
 	</div>
 </div>
 </body>

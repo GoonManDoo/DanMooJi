@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div align="center">
-		<div><h1>여기는 시험 메뉴부분임다.</h1></div>
+		<div><h1>헤더영역</h1></div>
 	</div>
 </body>
 </html>
