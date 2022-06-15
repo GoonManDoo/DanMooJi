@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.myserver.todo.mapper.TodoMapper">
+<!-- 전체조회 --> 
+<select id="findAll" resultType="todoVO">
+	SELECT NO, CONTENTS, TODOYN 
+	  FROM TODO
+	 ORDER BY NO 
+</select>
+
+<insert id="persist">
+	<selectKey order="BEFORE" keyProperty="no" resultType="string">
+		<!-- select 시퀀스.nextval from dual -->
+		SELECT MAX(no)+1 FROM TODO
+	</selectKey>
+	INSERT INTO 
+	       TODO (NO, 
+	             CONTENTS, 
+	             TODOYN ) 
+         VALUES ( #{no}, 
+                 #{contents}, 
+                 '0' )
+</insert>
+ 
+<update id="merge">
+	UPDATE TODO SET TODOYN = #{todoyn}
+	 WHERE NO = #{no} 
+</update>
+
+<delete id="remove">
+	DELETE TODO 
+	 WHERE NO = #{no}
+</delete>
+
+</mapper>

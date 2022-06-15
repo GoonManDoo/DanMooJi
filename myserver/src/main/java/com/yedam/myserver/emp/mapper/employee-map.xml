@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.myserver.emp.mapper.EmployeeMapper"> 
+
+<select id="findEmployees"  resultType="employee">
+	select *
+	from employees
+	order by employee_id  
+</select>
+
+<insert id="persist" >
+	insert into employees (
+			employee_id,
+			first_name,
+			last_name,
+			email,
+			hire_date,
+			job_id
+	) values (
+			#{employee_id},
+			#{first_name},
+			#{last_name},
+			#{email},
+			#{hire_date},
+			#{job_id}
+	)
+</insert>
+
+<insert id="remove" >
+	delete from employees
+	where employee_id = #{employee_id}
+</insert>
+
+<update id="merge" >
+	update employees
+	   set first_name = #{first_name},
+		   last_name = #{last_name},
+		   email = #{email},
+		   phone_number = #{phone_number},
+		   job_id = #{job_id},	
+		   salary = #{salary}    
+	where employee_id = #{employee_id}
+</update>
+
+<select id="findJobs" resultType="jobs">
+	select job_id, job_title 
+	  from jobs
+	 order by job_id 
+</select>
+
+<select id="findDepartments" resultType="departments">
+	select a.department_id, a.department_name 
+	  from departments a
+	 order by a.department_id 
+</select>
+
+</mapper>
