@@ -154,8 +154,20 @@ input {
 	
 	function todoDelete(){
 		$("#myUL").on("click", ".close", function(){
+			//var user = $(this).data('no');
+			//var result = confirm($('#myInput') + "정말로 삭제하시겠습니까?");
+			//if(! result)
+			//	return;
 			
-		})
+			var no = $('#myInput').val();
+			$.ajax({
+				url:'todoDelete',
+				data: {no: no},
+				dataType:'json'
+			}).done(function(){
+				todoList();
+			});
+		});
 	}
 	
 	function todoInsert(){
