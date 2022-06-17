@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+<!--  <bean id="logAdvice" class="com.yedam.myserver.common.LogAdvice"></bean>
+<bean id="afterLog" class="com.yedam.myserver.common.AfterLog"></bean>
+<bean id="aroundAdvice" class="com.yedam.myserver.common.AroundAdvice"></bean>
+<aop:config>
+	<aop:pointcut expression="execution(* com.yedam..*Impl.*(..))" id="allpointcut"/>
+	<aop:pointcut expression="execution(* com.yedam..*Impl.find*(..))" id="findpointcut"/>
+	
+	<aop:aspect ref="logAdvice">
+		<aop:before method="PrintLog" pointcut-ref="allpointcut"/>
+	</aop:aspect>
+	
+	<aop:aspect ref="afterLog">
+		<aop:after-returning method="printLog" pointcut-ref="allpointcut" returning="obj"/>
+	</aop:aspect>
+	<aop:aspect ref="aroundAdvice">
+	
+	<aop:around method="aroundLog" pointcut-ref="allpointcut"/>
+	</aop:aspect>
+</aop:config>-->
+</beans>

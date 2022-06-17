@@ -1,6 +1,8 @@
 package com.yedam.myserver.emp.vo;
 
+import lombok.ToString;
 
+@ToString
 public class Departments {
 	private String location_id;
 	private String city;

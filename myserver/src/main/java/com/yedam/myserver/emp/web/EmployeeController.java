@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import com.yedam.myserver.emp.vo.Departments;
 import com.yedam.myserver.emp.vo.Employee;
 
 @RestController
+@CrossOrigin(origins = {"http://127.0.0.1:5500"})
 public class EmployeeController {
 	private static final Logger logger = 
 			LoggerFactory.getLogger(EmployeeController.class);
@@ -59,5 +61,10 @@ public class EmployeeController {
 		employeeDao.remove(bean);
 		return bean;
 	}	
+	//부서별 인원수
+	@RequestMapping("empStat")
+	public List<Map> empStat(){
+		return employeeDao.empStat();
+	}
 	
 }

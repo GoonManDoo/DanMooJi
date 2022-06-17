@@ -1,6 +1,7 @@
 package com.yedam.myserver.emp.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yedam.myserver.emp.vo.Departments;
 import com.yedam.myserver.emp.vo.Employee;
@@ -15,4 +16,5 @@ public interface EmployeeMapper {
 	
 	List<Jobs> findJobs();				//job검색
 	List<Departments> findDepartments();//부서검색
+	List<Map> empStat();
 }

@@ -36,11 +36,14 @@
 
 <!-- 등록 -->
 <insert id="persist" parameterType="userVO">
-	insert into users (id, password, name, role)
-	values ( #{id},
-	#{password},
-	#{name},
-	#{role} )
+	insert into users (id, 
+					   password, 
+					   name, 
+					   role)
+			  values ( #{id},
+				  	   #{password},
+					   #{name},
+					   #{role} )
 </insert>
 
 <!-- 수정 -->

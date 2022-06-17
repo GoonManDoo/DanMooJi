@@ -10,4 +10,5 @@ public class PetVO {
     private String age;
     private String breed;
     private String location;
+    private String price;
 }

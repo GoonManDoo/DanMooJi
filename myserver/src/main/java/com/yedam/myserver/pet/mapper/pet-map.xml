@@ -4,8 +4,11 @@
 
 <!-- pet 전체조회 --> 
 <select id="findPetAll" resultType="petVO">
-	SELECT *
-	  FROM PET
+	SELECT P.*
+		    , (SELECT price 
+		       FROM ADOPT A 
+		       WHERE P.ID = A.ID) PRICE
+	  FROM PET P
 	 ORDER BY ID
 </select>
 
@@ -18,7 +21,9 @@
 
 <!-- 분양정보 등록 -->
 <insert id="persist">
-	INSERT INTO ADOPT VALUES ( #{id}, #{price} ) 
+	INSERT INTO ADOPT 
+			VALUES ( #{id}, 
+					 #{price} ) 
 </insert>
 
 </mapper>

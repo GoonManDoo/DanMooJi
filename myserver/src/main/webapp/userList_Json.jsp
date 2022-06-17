@@ -40,15 +40,14 @@
       //삭제 버튼 클릭
       $('body').on('click','#btnDelete',function(){
          //var userId = $(this).closest('tr').find('#hidden_userId').val();
-         var user = $(this).closest('tr').data('id');
          var result = confirm(user +" 사용자를 정말로 삭제하시겠습니까?");
+         var userId = $(this).closest('tr').data('id');
          if(! result) 
             return;
 
          $.ajax({
-            url:conPath + '/userDelete',
-            data : {id:user},
-            type:'get',
+            url:conPath + '/users/' + userId,
+            type:'delete',
             dataType:'json'
          }).done(function(xhr) {
             console.log(xhr.result);
@@ -67,9 +66,7 @@
          var userId = $(this).closest("tr").data("id");
          //특정 사용자 조회
          $.ajax({
-            url:conPath + '/userSelect',
-            data : {id:userId},
-            type:'GET',
+            url:conPath + '/users/' + userId,
             dataType:'json'
          }).done(
             userSelectResult
@@ -91,16 +88,18 @@
    function userUpdate() {
       //수정 버튼 클릭
       $('#btnUpdate').on('click',function(){
-   /*      var id = $('input:text[name="id"]').val();
+         var id = $('input:text[name="id"]').val();
          var name = $('input:text[name="name"]').val();
          var password = $('input:text[name="password"]').val();
-         var role = $('select[name="role"]').val();      */
+         var role = $('select[name="role"]').val();      
          $.ajax({ 
-             url: conPath + '/userUpdate', 
-             type: 'POST', 
-             dataType: 'json', 
+             url: conPath + '/users', 
+             type: 'PUT', 
+             dataType: 'json',     //응답결과가 json
+             contentType : 'application/json', //요청파라미터가 json
+             data: JSON.stringify( {id, name, password, role} ),
            //data: {id:id, name:name}
-             data: $("#form1").serialize() // 필드명과 변수명이동일하면 변수명만 적으면됨
+           //data: $("#form1").serialize() // 필드명과 변수명이동일하면 변수명만 적으면됨
              
          }).done( function(data) { 
                  userList();
@@ -119,9 +118,9 @@
          var password = $('input:text[name="password"]').val();
          var role = $('select[name="role"]').val();      
          $.ajax({ 
-             url: conPath + '/userInsert',  
+             url: conPath + '/users',  
              type: 'POST',  
-             data: { id: id, name:name,password:password, role:role },
+             data: {id, name, password, role },
              dataType: 'json', 
           }).done( function(response) {
                    userList();
@@ -161,7 +160,7 @@
    //사용자 목록 조회 요청
    function userList() {
       $.ajax({
-         url:conPath + '/userSelectAll',
+         url:conPath + '/users',
          type:'GET',
          dataType:'json'
       }).fail(function(xhr,status,msg){
