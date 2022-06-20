@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+		<div class="container">
+		<input name="targetDt" id="targetDt" value="20220619">
+		<button type="button" id="btnBoxOffice">검색</button>
+		<div id="divBoxOffice">
+			<div class="movie row" style="display : none">
+				<div class="col-2">2</div>
+				<div class="col-10">범죄도시 2</div>
+			</div>
+		</div>
+		<div id="divMovieInfo" style="display:none">
+			<div class="row">
+				<div class="col-2">런닝타임:</div>
+				<div class="col-10 showTm">104</div>
+			</div>
+			<div class="row">
+				<div class="col-2">개봉일:</div>
+				<div class="col-10 openDt">20220615</div>
+			</div>
+			<div class="row">
+				<div class="col-2">actors:</div>
+				<div class="col-10"><div class="row actors">크리스 에반스,타이카 와이티티,피터 손</div></div>
+			</div>
+			<div class="row">
+				<div class="col-2">directors:</div>
+				<div class="col-10"><div class="row directors">앵거스 맥클레인</div></div>
+			</div>
+		</div>
+	</div>
+  
+  <script>
+  var url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20220614'
+ 
+  //$.getJson(url, dailyList)랑 밑에랑 같은거
+  $.ajax({
+    url : url, 
+    method : 'get',
+    dataType : 'json',
+    success : dailyList
+  })
+  
+  function dailyList(result){
+    console.log(result.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
+  }
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.myserver.todo.mapper.TodoMapper">
 <!-- 전체조회 --> 
-<select id="findAll" resultType="int">
+<select id="findAll" resultType="todoVO">
 	SELECT NO, CONTENTS, TODOYN 
 	  FROM TODO
 	 ORDER BY NO 
