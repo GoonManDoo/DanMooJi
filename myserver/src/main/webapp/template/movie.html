@@ -11,12 +11,8 @@
 		<div class="container">
 		<input name="targetDt" id="targetDt" value="20220619">
 		<button type="button" id="btnBoxOffice">검색</button>
-		<div id="divBoxOffice">
-			<div class="movie row" style="display : none">
-				<div class="col-2">2</div>
-				<div class="col-10">범죄도시 2</div>
-			</div>
-		</div>
+		<div id="divBoxOffice"></div>
+		
 		<div id="divMovieInfo" style="display:none">
 			<div class="row">
 				<div class="col-2">런닝타임:</div>
@@ -38,19 +34,68 @@
 	</div>
   
   <script>
-  var url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20220614'
- 
-  //$.getJson(url, dailyList)랑 밑에랑 같은거
-  $.ajax({
-    url : url, 
-    method : 'get',
-    dataType : 'json',
-    success : dailyList
+  $(function(){
+	  btnBoxOfficeHandler(); //박스오피스
+  	  movieInfoHandler();    //영화상세정보
   })
   
-  function dailyList(result){
-    console.log(result.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
-  }
+ 	function btnBoxOfficeHandler(){
+ 		$('#btnBoxOffice').on("click", function(){
+ 			//날짜 입력값 조회
+ 			let dt = $("#targetDt").val();
+ 			//날짜가 입력이 안 된 경우 
+ 		
+ 		var url = 'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt='+dt;
+ 		
+ 			$.ajax({
+ 			url : url,
+ 		method : 'get',
+ 		dataType : 'json',
+ 		success : boxOfficeCallback
+ 			
+ 		})
+ 	});
+ 	}
+ 	function boxOfficeCallback(result){
+ 		let list = result.boxOfficeResult.dailyBoxOfficeList
+ 		$("#divBoxOffice").empty();
+ 		for(mv of list) {
+ 			$("<div>").addClass("movie row")
+ 					  .attr("data-moviecd", mv.movieCd)
+ 					  .append($("<div>").html(mv.rank).addClass("col-2"))
+ 					  .append($("<div>").html(mv.movieNm).addClass("col-10"))
+ 					  .appendTo("#divBoxOffice")
+ 		}
+ 	}
+ 	function movieInfoHandler(result){
+ 		$("#divBoxOffice").on("click", ".movie", function(){
+ 			let moviecd = $(this).data("moviecd");
+ 			var url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd='+moviecd;
+ 			$.ajax({
+ 				url : url,
+ 				method : 'get',
+ 				dataType : 'json'
+ 			}).done(function(result){
+ 				
+	 			$("#divMovieInfo").show();
+	 			let info = result.movieInfoResult.movieInfo;
+	 			
+	 			let actors = ''
+	 			for(actor of info.actors) {
+	 				actors += `<div class="col-3">${actor.peopleNm}</div>`;
+	 			}
+	 			let directors = ''
+	 	 	    info.directors.forEach((ele, index) => {
+	 	 			directors += `<div class="col-3">${ele.peopleNm}</div>`;
+	 	 	    })
+	 			$(".showTm").html(info.showtm);
+	 			$(".openDt").html(info.openDt);
+	 			$(".actors").html(actors);
+	 			$(".directors").html(directors);
+	 		})
+ 		})
+ 		
+ 	}
 </script>
 </body>
 </html>

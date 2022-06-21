@@ -18,7 +18,7 @@ ${param.error}
   <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
 </c:if>
 <form action="processLogin" method="post">
-  
+  <sec:csrfInput/>
   <dl>
     <dt>
       로그인 ID

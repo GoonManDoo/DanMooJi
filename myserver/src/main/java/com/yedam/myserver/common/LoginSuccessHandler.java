@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.yedam.myserver.HomeController;
+import com.yedam.myserver.users.vo.UserVO;
 
 //로그인처리 후 -> handler(추가작업, session 추가 등) -> 페이지 포워드
 @Component
@@ -24,6 +25,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		 String name = authentication.getName(); //접속한 사용자ID
+		 UserVO vo = (UserVO)authentication.getPrincipal();
+		 request.getSession().setAttribute("suser", vo);
 		 logger.info("handler========" + name);
 		 response.sendRedirect("top.jsp");
 		
